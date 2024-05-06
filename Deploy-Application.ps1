@@ -107,8 +107,8 @@ Try {
     ##* VARIABLE DECLARATION
     ##*===============================================
     ## Variables: Application
-    [String]$appVendor = 'Google Chrome'
-    [String]$appName = 'Google Chrome'
+    [String]$appVendor = 'Microsoft Edge'
+    [String]$appName = 'Microsoft Edge'
     [String]$appVersion = '3.10'
     [String]$appArch = 'x64-based PC'
     [String]$appLang = 'EN'
@@ -118,8 +118,8 @@ Try {
     [String]$appScriptAuthor = 'BCIT'
     ##*===============================================
     ## Variables: Install Titles (Only set here to override defaults set by the toolkit)
-    [String]$installName = 'Google Chrome'
-    [String]$installTitle = 'Google Chrome'
+    [String]$installName = 'Microsoft Edge'
+    [String]$installTitle = 'Microsoft Edge'
 
     ##* Do not modify section below
     #region DoNotModify
@@ -182,7 +182,7 @@ Try {
         [String]$installPhase = 'Pre-Installation'
 
         ## Show Welcome Message, close Internet Explorer if required, allow up to 3 deferrals, verify there is enough disk space to complete the install, and persist the prompt
-        Show-InstallationWelcome -CloseApps 'Chrome' -CloseAppsCountdown 1800 -MinimizeWindows $False -TopMost $true
+        Show-InstallationWelcome -CloseApps 'MSedge' -CloseAppsCountdown 1800 -MinimizeWindows $False -TopMost $true
 
         ## Show Progress Message (with the default message)
         #Show-InstallationProgress
@@ -207,13 +207,13 @@ Try {
 
         ## <Perform Installation tasks here>
 
-        $schtaskName = "Restart Chrome"
-        $schtaskDescription = "This will restart chrome as user after forced restart"
-        $TaskFilePath = "BCIT-Tasks\ChromeRestart"    ##SchTask Script Folder
-        $scriptSavePathNamePS = "ChromeRestart.ps1"     ##SchTask PS Script to initiate - this will go in SchTask Script Folder on machine
-        $scriptSavePathNameVBS = "ChromeRestart-VBSHelper.vbs" ##VBS Helper Name - this will go in SchTask Script Folder on machine
+        $schtaskName = "Restart Edge"
+        $schtaskDescription = "This will restart Edge as user after forced restart"
+        $TaskFilePath = "BCIT-Tasks\EdgeRestart"    ##SchTask Script Folder
+        $scriptSavePathNamePS = "EdgeRestart.ps1"     ##SchTask PS Script to initiate - this will go in SchTask Script Folder on machine
+        $scriptSavePathNameVBS = "EdgeRestart-VBSHelper.vbs" ##VBS Helper Name - this will go in SchTask Script Folder on machine
         $schtaskScript = @'
-        start-process "chrome.exe"
+        start-process "msedge.exe"
 '@
         ###########################################################################################
         $scriptSavePath = $(Join-Path -Path $env:ProgramData -ChildPath $TaskFilePath)
@@ -245,13 +245,13 @@ Try {
         $null = Register-ScheduledTask -TaskName $schtaskName -Action $action -Principal $principal -Settings $settings -Description $schtaskDescription -Force
         Start-ScheduledTask $schtaskName
         Unregister-ScheduledTask $schtaskName -Confirm:$false
-        Remove-Item "C:\ProgramData\BCIT-Tasks\ChromeRestart" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item "C:\ProgramData\BCIT-Tasks\EdgeRestart" -Recurse -Force -ErrorAction SilentlyContinue
 
         $schtaskName = "LaunchReminder"
         $schtaskDescription = "This will remind the user to restore tabs"
-        $TaskFilePath = "BCIT-Tasks\ChromeReminder"    ##SchTask Script Folder
-        $scriptSavePathNamePS = "ChromeReminder.ps1"     ##SchTask PS Script to initiate - this will go in SchTask Script Folder on machine
-        $scriptSavePathNameVBS = "ChromeReminder-VBSHelper.vbs" ##VBS Helper Name - this will go in SchTask Script Folder on machine
+        $TaskFilePath = "BCIT-Tasks\EdgeReminder"    ##SchTask Script Folder
+        $scriptSavePathNamePS = "EdgeReminder.ps1"     ##SchTask PS Script to initiate - this will go in SchTask Script Folder on machine
+        $scriptSavePathNameVBS = "EdgeReminder-VBSHelper.vbs" ##VBS Helper Name - this will go in SchTask Script Folder on machine
         $ToastScript = @'
 function Display-ToastNotification() {
     $Load = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
@@ -270,8 +270,8 @@ function Display-ToastNotification() {
     }
 }
 # Setting image variables
-$LogoImageUri = "https://i.imgur.com/a4gmyF2.png"
-$HeroImageUri = "https://i.imgur.com/DruPyaB.png"
+$LogoImageUri = "https://i.imgur.com/m8SuMaJ.png"
+$HeroImageUri = "https://i.imgur.com/lRME56C.png"
 $LogoImage = "$env:TEMP\ToastLogoImage.png"
 $HeroImage = "$env:TEMP\ToastHeroImage.png"
 $Uptime= get-computerinfo | Select-Object OSUptime 
@@ -288,7 +288,7 @@ $Scenario = 'reminder' # <!-- Possible values are: reminder | short | long -->
 $AttributionText = "Message From Bexar County"
 $HeaderText = "Don't Forget! You can restore your tabs!"
 $TitleText = "Update Completed"
-$BodyText1 = "If Chrome has restarted, you are likely to be given the option to click 'Restore' to open your last session and tabs."
+$BodyText1 = "If Edge has restarted, you are likely to be given the option to click 'Restore' to open your last session and tabs."
 $BodyText2 = "Thank you for your assisance in ensuring our compliance."
 
 
@@ -345,7 +345,7 @@ if ((Get-ItemProperty -Path "$RegPath\$App" -Name 'ShowInActionCenter' -ErrorAct
 Display-ToastNotification
 '@
         $schtaskScript = @'
-        &"C:\programdata\BCIT-Tasks\ChromeReminder\Toast.ps1"
+        &"C:\programdata\BCIT-Tasks\EdgeReminder\Toast.ps1"
 '@
         ###########################################################################################
         $scriptSavePath = $(Join-Path -Path $env:ProgramData -ChildPath $TaskFilePath)
@@ -378,7 +378,7 @@ Display-ToastNotification
         $null = Register-ScheduledTask -TaskName $schtaskName -Action $action -Principal $principal -Settings $settings -Description $schtaskDescription -Force
         Start-ScheduledTask $schtaskName
         Unregister-ScheduledTask $schtaskName -Confirm:$false
-        Remove-Item "C:\ProgramData\BCIT-Tasks\ChromeReminder" -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item "C:\ProgramData\BCIT-Tasks\EdgeReminder" -Recurse -Force -ErrorAction SilentlyContinue
         ##*===============================================
         ##* POST-INSTALLATION
         ##*===============================================
