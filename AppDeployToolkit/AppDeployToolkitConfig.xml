@@ -140,13 +140,13 @@
         <!-- Text displayed on the continue button when prompting to close running programs. -->
         <ClosePrompt_ButtonContinueTooltip>Only select "Update" after closing the above listed application(s).</ClosePrompt_ButtonContinueTooltip>
         <!-- Tooltip text displayed on the continue button when prompting to close running programs. -->
-        <ClosePrompt_ButtonClose>Restart Chrome Now</ClosePrompt_ButtonClose>
+        <ClosePrompt_ButtonClose>Restart Edge Now</ClosePrompt_ButtonClose>
         <!-- Text displayed on the close button when prompting to close running programs. -->
         <ClosePrompt_ButtonDefer>Defer</ClosePrompt_ButtonDefer>
         <!-- Text displayed on the defer button when prompting to close running programs. -->
         <ClosePrompt_Message>The following browsers must be closed in order to complete the update. Expected Duration: 1min
 
-Please save your work and click "Restart Chrome Now" at your earliest convenience.</ClosePrompt_Message>
+Please save your work and click "Restart Edge Now" at your earliest convenience.</ClosePrompt_Message>
         <!-- Text displayed when prompting to close running programs. -->
         <ClosePrompt_CountdownMessage>The SAP application will automatically be closed in:</ClosePrompt_CountdownMessage>
         <!-- Text displayed when counting down to automatically closing applications. -->
@@ -161,7 +161,7 @@ Please save your work and click "Restart Chrome Now" at your earliest convenienc
         <DeferPrompt_Deadline>Deadline:</DeferPrompt_Deadline>
         <!-- Text displayed when there is a specific deferral deadline. -->
 
-        <WelcomePrompt_CountdownMessage>Google Chrome will automatically restart in:</WelcomePrompt_CountdownMessage>
+        <WelcomePrompt_CountdownMessage>Microsoft Edge will automatically restart in:</WelcomePrompt_CountdownMessage>
         <!-- The countdown message displayed at the Welcome Screen to indicate when the install will        continue if no response from user. -->
         <WelcomePrompt_CustomMessage></WelcomePrompt_CustomMessage>
         <!-- This is a custom message to display at the Welcome Screen window. -->
